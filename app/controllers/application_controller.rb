@@ -1,4 +1,6 @@
-require_dependency( 'vendor/plugins/blacklight/app/controllers/application_controller.rb')
+# require_dependency( 'vendor/plugins/blacklight/app/controllers/application_controller.rb')
+require_dependency File.join(File.dirname(__FILE__), '..','..','vendor','plugins','blacklight','app','controllers','application_controller.rb')
+
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 
