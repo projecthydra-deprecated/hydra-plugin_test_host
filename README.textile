@@ -1,14 +1,14 @@
 h1. Hydra Plugin Test Host
 
-This is an empty rails app to use as the "host" application when testing Hydra plugins.
+This is a blankl Rails app with Blacklight installed in it.  It is meant to be used as the "host" application when testing Hydra plugins.
 
 h2. Note about Rails2 & Rails3
 
-This tool is currently for testing Rails2 plugins. 
+This tool is currently for testing Rails2 plugins. We might create a version for Rails3.
 
 h2. Usage
 
-Put a copy of this app into the root of the working copy of your plugin, then add these lines to your spec/spec_helper.rb (or whatever initializes your tests).  If you put gave the test host a different name, be sure to change the lines that reference "hydra-test_host".
+Put a copy of this app into the root of the working copy of your plugin, then add these lines to your spec/spec_helper.rb (or whatever initializes your tests).  If you gave the test host a different name, be sure to change the lines that reference "hydra-plugin_test_host".
 
 <pre>
   require File.dirname(__FILE__) + "/../hydra-plugin_test_host/config/environment" unless defined?(RAILS_ROOT)
