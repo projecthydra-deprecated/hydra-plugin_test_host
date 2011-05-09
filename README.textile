@@ -13,6 +13,7 @@ rake hydra:jetty:load
 h2. Testing
 
 Prep the database and fixtures for tests
+
 <pre>
 rake db:drop RAILS_ENV=test
 rake db:migrate:all RAILS_ENV=test  
@@ -20,6 +21,7 @@ rake hydra:default_fixtures:refresh environment=test
 </pre>
 
 Run the tests with hydra_head:rspec
+
 <pre>
 rake hydra_head:rspec
 </pre>
