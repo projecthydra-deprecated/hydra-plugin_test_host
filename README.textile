@@ -1,0 +1,27 @@
+h2. Installation
+
+<pre>
+git submodule init jetty
+git submodule update
+git submodule init vendor/plugins/hydra-head/
+git submodule update vendor/plugins/hydra-head/
+bundle install
+rake db:migrate:all 
+rake hydra:jetty:load
+</pre>
+
+h2. Testing
+
+Prep the database and fixtures for tests
+
+<pre>
+rake db:drop RAILS_ENV=test
+rake db:migrate:all RAILS_ENV=test  
+rake hydra:default_fixtures:refresh environment=test
+</pre>
+
+Run the tests with hydra_head:rspec
+
+<pre>
+rake hydra_head:rspec
+</pre>
