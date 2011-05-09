@@ -1,3 +1,6 @@
 [submodule "jetty"]
 	path = jetty
 	url = git@github.com:projecthydra/hydra-jetty.git
+[submodule "vendor/plugins/hydra-head"]
+	path = vendor/plugins/hydra-head
+	url = git@github.com:projecthydra/hydra-head.git
