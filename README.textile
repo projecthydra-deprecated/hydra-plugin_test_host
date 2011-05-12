@@ -82,7 +82,7 @@ bundle install
 </pre>
 
 
-NOTE: to test the hydra-head app, now refer to README_FOR_HYDRA_HEAD_TESTING
+NOTE: to TEST the hydra-head app, now refer to README_FOR_HYDRA_HEAD_TESTING
 
 6.  Migrate the databases.
 <pre>
