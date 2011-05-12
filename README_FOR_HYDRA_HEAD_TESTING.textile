@@ -97,7 +97,7 @@ cd jetty
 git clean -df
 git checkout .
 git status     should show nothing to commit
-cd ..   (back to root of the _plugin_)
+cd ..
 </pre>
 
 3. Re-initialize and start Jetty:
