@@ -1,27 +1,132 @@
-h2. Installation
+h1. Hydra Plugin Test Host
+
+This is a blank Rails app with Blacklight installed in it.  It is meant to be used as the "host" application when testing Hydra plugins.
+
+The full hydra stack (provided by this app) includes the following:
+
+- Blacklight for the User Interface
+- Solr for the Search Engine
+- ActiveFedora to let the rails application talk to fedora
+- OM to streamline the metadata configuration
+- Solrizer to write Fedora content to the Solr index
+- SolrizerFedora for something.
+
+
+h2. Note about Rails2 & Rails3
+
+This tool is currently for testing Rails2 plugins. We might create a version for Rails3.
+
+h2. Installation:
+
+h3. Prerequisites
+* ruby v 1.8.7 or higher
+* rubygems
+* these ruby gems:
+** bundler
+** rails version < 3.
+* git
+* java 1.6 or higher
+
+
+0.  We strongly suggest using RVM  (ruby virtual machine) as a means of keeping your different ruby applications with their specific gem requirements from having version clashes. 
+
+See https://rvm.beginrescueend.com/
+
+If you don't have the desired ruby version in RVM, e.g. ree-1.8.7, then install it.
+<pre>
+rvm install ree-1.8.7
+</pre>
+
+1.  Get the code
+
+git clone git@github.com:projecthydra/hydra-plugin_test_host.git my-hydra-head-test-app
+cd my-hydra-head-test-app
+
+
+2.  Create an RVM gemset for your local hydra application
+The following will create an .rvmrc file, which ensures that this gemset will be used whenever you are in the my-hydra-app directory.
+<pre>
+echo "rvm use ree-1.8.7@my-hydra-head-test-app --create" >.rvmrc
+. .rvmrc
+</pre>
+
+You should get a message like this:
+ Using /usr/local/you/.rvm/gems/ree-1.8.7-2010.02 with gemset my-hydra-head-test-app
+
+
+3. Pull a copy of jetty pre-configured for Hydra with Fedora and Solr installed.
 
 <pre>
 git submodule init jetty
 git submodule update
+</pre>
+
+
+4. Pull a copy of the hydra-head rails 2 engines plugin
+
+<pre>
 git submodule init vendor/plugins/hydra-head/
 git submodule update vendor/plugins/hydra-head/
+</pre>
+
+
+5. Use bundler to install the gem dependencies.
+
+You may need to install bundler into the gemset first:
+<pre>
+gem install bundler
+</pre>
+
+<pre>
 bundle install
-rake db:migrate:all 
+</pre>
+
+
+NOTE: to test the hydra-head app, now refer to README_FOR_HYDRA_HEAD_TESTING
+
+6.  Migrate the databases.
+<pre>
+rake db:migrate:all
+</pre>
+
+
+7. Run the bundled copy of Jetty, preloaded with Fedora and Solr applications.
+
+Note that java 1.6 must be invoked by the "java" command or Hydrangea won't work.
+
+<pre>
 rake hydra:jetty:load
 </pre>
 
-h2. Testing
+This will start up jetty on port 8983.
 
-Prep the database and fixtures for tests
 
+8.  Load test fixtures into Fedora/Solr, if you want.
 <pre>
-rake db:drop RAILS_ENV=test
-rake db:migrate:all RAILS_ENV=test  
-rake hydra:default_fixtures:refresh environment=test
+rake hydra:default_fixtures:refresh
 </pre>
 
-Run the tests with hydra_head:rspec
+
+9.  Start the rails app
 
 <pre>
-rake hydra_head:rspec
+./script/server
 </pre>
+
+This will start the rails app on port 3000.
+
+
+h4. Don't forget to stop jetty.
+
+It's easy to forget a running jetty, start another jetty process, 
+and then get confusing behavior because you have two jetty instances on the
+same port.
+
+To stop jetty:
+From the rails application directory  (my-hydra-head-test-app)
+<pre>
+rake hydra:jetty:stop
+</pre>
+
+Use ps to ensure the java process has stopped.  If not, kill it manually.
+
