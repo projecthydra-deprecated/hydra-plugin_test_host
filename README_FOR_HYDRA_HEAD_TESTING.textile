@@ -1,0 +1,115 @@
+h1.  Testing the Hydra-Head Engines Plugin
+
+See the basic README file for more information about hydra-plugin_test_host
+
+
+h3. You must follow the installation instructions in the basic README up to migrating the databases.
+
+
+h4.  Switch to the testing branch
+
+We use a git BRANCH for testing:
+<pre>
+  git checkout installed-plugin
+</pre>
+
+
+h4.  Migrate the test databases
+
+See below to reset the test databases when re-running tests.
+
+NOTE: to ensure that the tests do not rely on non-test data, do 
+<pre>
+rake db:drop:all
+</pre>
+
+<pre>
+rake db:migrate:all RAILS_ENV=test  
+</pre>
+
+
+h4.  Start jetty
+
+See below to reset jetty when re-running tests, or when running a simultaneous development instance.
+
+Ensure nothing is running on port 8983.
+
+Note that java 1.6 must be invoked by the "java" command or Hydrangea won't work.
+
+<pre>
+rake hydra:jetty:load
+</pre>
+
+This will start up jetty on port 8983.
+
+
+h4. Load test fixtures into Fedora/Solr.
+
+NOTE: to ensure that the tests do not rely on non-test data, do 
+<pre>
+rake hydra:default_fixtures:delete
+</pre>
+
+<pre>
+rake hydra:default_fixtures:refresh environment=test
+</pre>
+
+(TO DO: get rid of irrelevant fixtures; get rid of non-generic fixtures.)
+
+
+h4.  Run specs.
+
+<pre>
+rake hydra_head:rspec
+</pre>
+
+
+
+h3. If you need to Re-run the tests:
+
+h4. Clean out the databases:
+
+<pre>
+rake db:drop RAILS_ENV=test
+  or
+rake db:drop:all   (to ensure that the tests do not rely on non-test data)
+</pre>
+
+<pre>
+rake db:migrate:all RAILS_ENV=test  
+</pre>
+
+
+h4. Clean out the fixtures:
+
+1. Stop jetty
+<pre>
+rake hydra:jetty:stop
+  Use ps to ensure the java process has stopped.  If not, kill it manually.
+</pre>
+
+2. Clean out Solr and Fedora on Jetty
+
+(note:  this will also wipe out the development data until we use the single solr instance of hydra-jetty)
+
+<pre>
+cd jetty
+git clean -df
+git checkout .
+git status     should show nothing to commit
+cd ..   (back to root of the _plugin_)
+</pre>
+
+3. Re-initialize and start Jetty:
+<pre>
+rake hydra:jetty:load
+</pre>
+
+4. Reload the pristine fixtures.
+NOTE: to ensure that the tests do not rely on non-test data, do 
+<pre>
+rake hydra:default_fixtures:delete
+</pre>
+<pre>
+  rake hydra:default_fixtures:refresh environment=test
+</pre>
