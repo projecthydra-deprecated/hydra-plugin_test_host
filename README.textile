@@ -33,18 +33,22 @@ h4.  (0) We strongly suggest using RVM  (ruby virtual machine) as a means of kee
 See https://rvm.beginrescueend.com/
 
 If you don't have the desired ruby version in RVM, e.g. ree-1.8.7, then install it.
+
 <pre>
 rvm install ree-1.8.7
 </pre>
 
 h4.  (1) Get the code
+
 <pre>
 git clone git@github.com:projecthydra/hydra-plugin_test_host.git my-hydra-head-test-app
 cd my-hydra-head-test-app
 </pre>
 
 h4.  (2) Create an RVM gemset for your local hydra application
+
 The following will create an .rvmrc file, which ensures that this gemset will be used whenever you are in the my-hydra-app directory.
+
 <pre>
 echo "rvm use ree-1.8.7@my-hydra-head-test-app --create" >.rvmrc
 . .rvmrc
@@ -54,7 +58,7 @@ You should get a message like this:
  Using /usr/local/you/.rvm/gems/ree-1.8.7-2010.02 with gemset my-hydra-head-test-app
 
 
-h3.  to TEST the hydra-head app, now refer to README_FOR_HYDRA_HEAD_TESTING
+h3. To TEST the hydra-head app, now refer to README_FOR_HYDRA_HEAD_TESTING
 
 
 h3.  To start the rails app
