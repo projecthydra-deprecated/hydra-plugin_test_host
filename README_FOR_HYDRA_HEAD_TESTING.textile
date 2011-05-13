@@ -9,6 +9,7 @@ h3. You must follow the initial installation instructions in the basic README.
 h4.  (1) Switch to the testing branch
 
 We use a git BRANCH for testing:
+
 <pre>
   git checkout installed-plugin
 </pre>
@@ -37,6 +38,7 @@ bundle install
 </pre>
 
 You may need to install bundler into the gemset first:
+
 <pre>
 gem install bundler
 </pre>
@@ -46,7 +48,8 @@ h4.  (5) Migrate the test databases
 
 See below to reset the test databases when re-running tests.
 
-NOTE: to ensure that the tests do not rely on non-test data, do 
+NOTE: to ensure that the tests do not rely on non-test data, do this first:
+
 <pre>
 rake db:drop:all
 </pre>
@@ -73,7 +76,8 @@ This will start up jetty on port 8983.
 
 h4.  (7) Load test fixtures into Fedora/Solr.
 
-NOTE: to ensure that the tests do not rely on non-test data, do 
+NOTE: to ensure that the tests do not rely on non-test data, do this first: 
+
 <pre>
 rake hydra:default_fixtures:delete
 </pre>
@@ -100,6 +104,7 @@ same port.
 
 To stop jetty:
 From the rails application directory  (my-hydra-head-test-app)
+
 <pre>
 rake hydra:jetty:stop
 </pre>
@@ -125,6 +130,7 @@ rake db:migrate:all RAILS_ENV=test
 h4. Clean out the fixtures:
 
 1. Stop jetty
+
 <pre>
 rake hydra:jetty:stop
   Use ps to ensure the java process has stopped.  If not, kill it manually.
@@ -132,7 +138,7 @@ rake hydra:jetty:stop
 
 2. Clean out Solr and Fedora on Jetty
 
-(note:  this will also wipe out the development data until we use the single solr instance of hydra-jetty)
+(Note:  this will also wipe out the development data until we use the single solr instance of hydra-jetty)
 
 <pre>
 cd jetty
@@ -143,15 +149,18 @@ cd ..   (back to root of the _plugin_)
 </pre>
 
 3. Re-initialize and start Jetty:
+
 <pre>
 rake hydra:jetty:load
 </pre>
 
 4. Reload the pristine fixtures.
-NOTE: to ensure that the tests do not rely on non-test data, do 
+NOTE: to ensure that the tests do not rely on non-test data, do this first:
+
 <pre>
 rake hydra:default_fixtures:delete
 </pre>
+
 <pre>
   rake hydra:default_fixtures:refresh environment=test
 </pre>
