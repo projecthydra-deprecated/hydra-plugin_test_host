@@ -3,10 +3,10 @@ h1.  Testing the Hydra-Head Engines Plugin
 See the basic README file for more information about hydra-plugin_test_host
 
 
-h3. You must follow the installation instructions in the basic README up to migrating the databases.
+h3. You must follow the initial installation instructions in the basic README.
 
 
-h4.  Switch to the testing branch
+h4.  (1) Switch to the testing branch
 
 We use a git BRANCH for testing:
 <pre>
@@ -14,7 +14,35 @@ We use a git BRANCH for testing:
 </pre>
 
 
-h4.  Migrate the test databases
+h4. (2) Pull a copy of jetty pre-configured for Hydra with Fedora and Solr installed.
+
+<pre>
+git submodule init jetty
+git submodule update
+</pre>
+
+
+h4. (3) Pull a copy of the hydra-head rails 2 engines plugin
+
+<pre>
+git submodule init vendor/plugins/hydra-head/
+git submodule update vendor/plugins/hydra-head/
+</pre>
+
+
+h4. (4) Use bundler to install the gem dependencies.
+
+<pre>
+bundle install
+</pre>
+
+You may need to install bundler into the gemset first:
+<pre>
+gem install bundler
+</pre>
+
+
+h4.  (5) Migrate the test databases
 
 See below to reset the test databases when re-running tests.
 
@@ -28,7 +56,7 @@ rake db:migrate:all RAILS_ENV=test
 </pre>
 
 
-h4.  Start jetty
+h4.  (6) Start jetty
 
 See below to reset jetty when re-running tests, or when running a simultaneous development instance.
 
@@ -37,13 +65,13 @@ Ensure nothing is running on port 8983.
 Note that java 1.6 must be invoked by the "java" command or Hydrangea won't work.
 
 <pre>
-rake hydra:jetty:load
+rake hydra:jetty:load RAILS_ENV=test
 </pre>
 
 This will start up jetty on port 8983.
 
 
-h4. Load test fixtures into Fedora/Solr.
+h4.  (7) Load test fixtures into Fedora/Solr.
 
 NOTE: to ensure that the tests do not rely on non-test data, do 
 <pre>
@@ -57,12 +85,26 @@ rake hydra:default_fixtures:refresh environment=test
 (TO DO: get rid of irrelevant fixtures; get rid of non-generic fixtures.)
 
 
-h4.  Run specs.
+h4.  (8) Run specs.
 
 <pre>
 rake hydra_head:rspec
 </pre>
 
+
+h3. Don't forget to stop jetty.
+
+It's easy to forget a running jetty, start another jetty process, 
+and then get confusing behavior because you have two jetty instances on the
+same port.
+
+To stop jetty:
+From the rails application directory  (my-hydra-head-test-app)
+<pre>
+rake hydra:jetty:stop
+</pre>
+
+Use ps to ensure the java process has stopped.  If not, kill it manually.
 
 
 h3. If you need to Re-run the tests:
@@ -97,7 +139,7 @@ cd jetty
 git clean -df
 git checkout .
 git status     should show nothing to commit
-cd ..
+cd ..   (back to root of the _plugin_)
 </pre>
 
 3. Re-initialize and start Jetty:
