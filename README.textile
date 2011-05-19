@@ -1,0 +1,5 @@
+This is the test host application for testing the hydra-head plugin.  
+
+For instructions on how to set up a rails app that functions as a Hydra Head, see the "Hydra Head Installation Instructions":https://github.com/projecthydra/hydra-head/blob/master/README_INSTALL_BLACKLIGHT.textile in the "hydra-head plugin":https://github.com/projecthydra/hydra-head/ git repository (https://github.com/projecthydra/hydra-head/).
+
+For instructions on how to test the hydra-head plugin, see the "Hydra Head Plugin Testing Instructions":https://github.com/projecthydra/hydra-head/blob/master/README_TESTING_PLUGIN.textile
