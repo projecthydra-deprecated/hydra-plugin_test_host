@@ -1,3 +1,11 @@
+h1. NOTICE: THIS PROJECT IS DEPRECATED
+
+h4. This project, and all others in "projecthydra-deprecated":http://github.com/projecthydra-deprecated, have been deprecated and are no longer actively maintained by the Hydra Project developer community. See the Hydra Project's main Github page at "projecthydra":http://github.com/projecthydra/ for projects that are actively maintained.
+
+_Original README is below_
+
+----------------------------
+
 This is the test host application for testing the hydra-head plugin.  
 
 For instructions on how to set up a rails app that functions as a Hydra Head, see the "Hydra Head Installation Instructions":https://github.com/projecthydra/hydra-head/blob/master/README_INSTALL_BLACKLIGHT.textile in the "hydra-head plugin":https://github.com/projecthydra/hydra-head/ git repository (https://github.com/projecthydra/hydra-head/).
